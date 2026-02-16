@@ -1,0 +1,2983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kamali | Frontend Developer & Designer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+/* ================= 🌊 MOVING WAVE MESH BACKGROUND ================= */
+body{
+  min-height:100vh;
+  color:#d6d6d6;
+  overflow-x:hidden;
+  background:#0f0f0f;
+}
+
+/* mesh base */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-30%;
+  background:
+    linear-gradient(120deg, rgba(196,122,69,.15), transparent 60%),
+    linear-gradient(240deg, rgba(255,180,120,.12), transparent 60%),
+    radial-gradient(circle at 20% 30%, rgba(196,122,69,.18), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(255,160,90,.15), transparent 45%);
+  filter:blur(60px);
+  animation:waveMesh 22s linear infinite;
+  z-index:-2;
+}
+
+/* mesh movement */
+body::after{
+  content:"";
+  position:fixed;
+  inset:-30%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(196,122,69,.12), transparent 55%);
+  filter:blur(80px);
+  animation:waveMesh2 30s ease-in-out infinite alternate;
+  z-index:-1;
+}
+
+@keyframes waveMesh{
+  0%{transform:translate(0,0) rotate(0deg);}
+  50%{transform:translate(120px,80px) rotate(180deg);}
+  100%{transform:translate(0,0) rotate(360deg);}
+}
+
+@keyframes waveMesh2{
+  0%{transform:translate(-80px,-40px);}
+  100%{transform:translate(100px,60px);}
+}
+
+/* remove default link style */
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* HAMBURGER */
+.menu-btn{
+  position:fixed;
+  top:22px;
+  right:22px;
+  font-size:20px;
+  cursor:pointer;
+  z-index:1001;
+}
+
+/* MENU PANEL */
+.menu-panel{
+  position:fixed;
+  top:0;
+  right:0;
+  width:300px;
+  height:100vh;
+  background:#111;
+  padding:30px;
+  transform:translateX(100%);
+  transition:.4s ease;
+  z-index:1000;
+}
+.menu-panel.active{transform:translateX(0);}
+
+.menu-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:35px;
+}
+
+.menu-panel ul li{
+  list-style:none;
+  margin:18px 0;
+  font-size:14px;
+  color:#aaa;
+}
+
+.menu-panel ul li i{
+  color:#c47a45;
+  margin-right:10px;
+}
+
+/* DROPDOWN */
+.dropdown-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+
+.dropdown-menu{
+  display:none;
+  margin-left:26px;
+  margin-top:10px;
+}
+
+.dropdown-menu li{
+  margin:10px 0;
+  font-size:13px;
+}
+
+@media(min-width:901px){
+  .dropdown:hover .dropdown-menu{
+    display:block;
+  }
+}
+
+/* FIXED SIDEBAR */
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:320px;
+  height:100vh;
+  background:rgba(31,31,31,.85);
+  backdrop-filter:blur(8px);
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.sidebar h2{font-size:26px;}
+.role{font-size:13px;color:#aaa;}
+
+.profile{
+  width:160px;
+  border-radius:22px;
+  margin:24px 0;
+}
+
+.email,.location{
+  font-size:14px;
+  color:#bbb;
+  margin-top:6px;
+}
+
+.social{
+  margin:22px 0;
+}
+.social a i{
+  margin:0 8px;
+  color:#aaa;
+}
+
+.hire{
+  background:#c47a45;
+  border:none;
+  padding:12px 34px;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* MAIN */
+.main{
+  margin-left:320px;
+  padding:90px;
+}
+
+.logo{
+  width:140px;
+  margin-bottom:35px;
+}
+
+.intro h1{
+  font-size:52px;
+  line-height:1.25;
+}
+.intro span{color:#c47a45;}
+
+.intro p{
+  margin-top:18px;
+  max-width:520px;
+  font-size:14px;
+  color:#aaa;
+}
+
+/* INFINITY */
+.circle-wrapper{
+  position:relative;
+  width:220px;
+  height:220px;
+  margin:90px auto;
+}
+
+.circle{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:1px solid #666;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:.4s ease;
+}
+
+.circle.one{animation:spin 14s linear infinite;}
+.circle.two{
+  inset:20px;
+  animation:spinReverse 10s linear infinite;
+}
+
+.circle-wrapper:hover .circle{
+  border-color:#c47a45;
+  box-shadow:
+    0 0 25px rgba(196,122,69,.6),
+    inset 0 0 25px rgba(196,122,69,.4);
+}
+.circle-wrapper:hover i{color:#c47a45;}
+
+.circle i{font-size:18px;}
+
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+@keyframes spinReverse{
+  from{transform:rotate(360deg);}
+  to{transform:rotate(0deg);}
+}
+
+/* STATS */
+.stats{
+  display:flex;
+  gap:90px;
+}
+.stats h2{
+  font-size:42px;
+  color:#c47a45;
+}
+.stats p{
+  font-size:13px;
+  color:#aaa;
+}
+
+/* SCROLL REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:1s ease;
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+  .main{
+    margin-left:0;
+    padding:40px 24px;
+  }
+  .intro h1{font-size:36px;}
+  .menu-panel{width:100%;}
+}
+/* ================= 🌊 MOVING WAVE MESH BACKGROUND ================= */
+body{
+  min-height:100vh;
+  color:#e6e6e6;
+  overflow-x:hidden;
+  background:#0f0f0f;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:-30%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(120,170,255,.18), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(100,150,255,.15), transparent 45%);
+  filter:blur(70px);
+  animation:waveMesh 24s linear infinite;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:-30%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(140,180,255,.12), transparent 55%);
+  filter:blur(90px);
+  animation:waveMesh2 32s ease-in-out infinite alternate;
+  z-index:-1;
+}/* FIXED SIDEBAR – FULL PANEL */
+.sidebar{
+  position:fixed;
+  top:20px;
+  left:20px;
+  width:300px;
+  height:calc(100vh - 40px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:28px;
+  background:rgba(20,20,20,.88);
+  backdrop-filter:blur(10px);
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+
+}
+
+.sidebar h2{
+  font-size:26px;
+  margin-bottom:4px;
+}
+
+.role{
+  font-size:13px;
+  color:#aab4ff;
+}
+
+.profile{
+  width:170px;
+  border-radius:24px;
+  margin:26px 0;
+}
+
+.email,.location{
+  font-size:14px;
+  color:#cfd6ff;
+  margin-top:6px;
+}
+
+.social{
+  margin:22px 0;
+}
+
+.social a i{
+  margin:0 8px;
+  color:#aab4ff;
+}
+
+.hire{
+  margin-top:auto;
+  width:100%;
+  background:#8fb0ff;
+  color:#000;
+  border:none;
+  padding:14px;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+}
+/* ===== BACKGROUND VIDEO ===== */
+.bg-video{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-3;
+}
+
+/* dark overlay for readability */
+.bg-video-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  z-index:-2;
+}
+body::before,
+body::after{
+  opacity:0.35;
+}
+/* CENTER WORDS OVER VIDEO */
+.hero-center{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;   /* vertical center */
+  align-items:center;       /* horizontal center */
+  text-align:center;
+}
+
+/* optional: better spacing */
+.hero-center .intro{
+  margin-bottom:40px;
+}
+
+.hero-center .stats{
+  justify-content:center;
+}
+
+/* LEFT FIXED CARD – DRAKE STYLE */
+.sidebar{
+  position:fixed;
+  top:20px;
+  left:20px;
+  width:300px;
+  height:calc(100vh - 40px);
+  background:#1b1b1b;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:28px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+/* NAME */
+.sidebar h2{
+  font-size:26px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+/* ROLE */
+.role{
+  font-size:13px;
+  color:#b5b5b5;
+}
+
+/* PROFILE IMAGE */
+.profile{
+  width:190px;
+  height:auto;
+  border-radius:22px;
+  margin:26px 0;
+  object-fit:cover;
+}
+
+/* EMAIL + LOCATION */
+.email,
+.location{
+  font-size:15px;
+  color:#e0e0e0;
+  margin-top:8px;
+}
+
+/* COPYRIGHT (optional) */
+.copyright{
+  font-size:12px;
+  color:#888;
+  margin-top:14px;
+}
+
+/* SOCIAL ICONS */
+.social{
+  display:flex;
+  gap:14px;
+  margin:22px 0;
+}
+
+.social a{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#ccc;
+  transition:.3s;
+}
+
+.social a:hover{
+  background:#ff7a18;
+  color:#000;
+  border-color:#ff7a18;
+}
+
+/* HIRE BUTTON */
+.hire{
+  margin-top:auto;
+  width:100%;
+  padding:14px;
+  border-radius:30px;
+  border:none;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  background:#ff7a18;
+  color:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}.main{
+  margin-left:340px;
+}
+/* ================= MOBILE: HERO FIRST, CARD NEXT ================= */
+@media (max-width: 900px){
+
+  body{
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* HERO CONTENT FIRST */
+  .main{
+    order:1;
+    margin-left:0;
+    padding:20px 16px 40px;
+  }
+
+  /* LEFT CARD COMES AFTER HERO */
+  .sidebar{
+    order:2;
+    position:relative;   /* not fixed */
+    top:0;
+    left:0;
+    width:100%;
+    height:auto;
+    margin:16px;
+    border-radius:22px;
+    padding:24px 20px;
+  }
+
+  /* PROFILE IMAGE SIZE */
+  .profile{
+    width:140px;
+    margin:20px 0;
+  }
+
+  /* HERO CENTER FIX */
+  .hero-center{
+    min-height:auto;
+    padding:60px 0 40px;
+  }
+
+  /* TEXT SCALE */
+  .intro h1{
+    font-size:32px;
+    line-height:1.3;
+  }
+
+  .intro p{
+    font-size:14px;
+    padding:0 6px;
+  }
+
+  /* CIRCLE SCALE */
+  .circle-wrapper{
+    width:160px;
+    height:160px;
+    margin:40px auto;
+  }
+
+  .circle.two{
+    inset:14px;
+  }
+
+  /* STATS STACK */
+  .stats{
+    flex-direction:column;
+    gap:28px;
+    align-items:center;
+  }
+
+  .stats h2{
+    font-size:32px;
+  }
+
+  /* MENU */
+  .menu-panel{
+    width:100%;
+  }
+
+  .menu-btn{
+    top:16px;
+    right:16px;
+    font-size:22px;
+  }
+}
+/* ================= DESKTOP VERTICAL ICON NAV ================= */
+.side-icon-nav{
+  position:fixed;
+  top:80px;                 /* below hamburger */
+  right:22px;
+  width:52px;
+  padding:12px 0;
+  background:#1b1b1b;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  z-index:999;
+}
+
+.side-icon-nav a{
+  color:#aaa;
+  font-size:16px;
+  transition:.3s ease;
+}
+
+.side-icon-nav a:hover{
+  color:#8fb0ff;
+}
+/* ❌ FORCE HIDE SIDE ICON NAV ON MOBILE */
+@media screen and (max-width: 900px){
+  .side-icon-nav{
+    display:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+  }
+}
+.side-icon-nav a.active{
+  color:#8fb0ff;
+}
+
+ /* ================= DESKTOP VERTICAL ICON NAV (CENTERED) ================= */
+.side-icon-nav{
+  position:fixed;
+  top:50%;
+  right:22px;
+  transform:translateY(-50%);   /* 👈 THIS centers it */
+  width:52px;
+  padding:14px 0;
+  background:#1b1b1b;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  z-index:999;
+}
+
+.side-icon-nav a{
+  color:#aaa;
+  font-size:16px;
+  transition:.3s ease;
+}
+
+.side-icon-nav a:hover{
+  color:#8fb0ff;
+}
+
+.side-icon-nav a.active{
+  color:#8fb0ff;
+}
+
+/* ================= MOBILE: SIDEBAR AS 2ND VIEW ================= */
+@media(max-width:900px){
+
+  /* Sidebar becomes a normal section */
+  .sidebar{
+    position:relative;
+    top:auto;
+    left:auto;
+    width:100%;
+    height:auto;
+    margin:40px 0 0 0;
+    border-radius:0;
+    border:none;
+    padding:40px 20px;
+    background:#1b1b1b;
+  }
+
+  /* Make it feel like a full section */
+  .sidebar::before{
+    content:"";
+    display:block;
+    width:60px;
+    height:4px;
+    background:#ff7a18;
+    border-radius:10px;
+    margin:0 auto 30px;
+  }
+
+  /* Center everything nicely */
+  .sidebar h2{
+    font-size:24px;
+  }
+
+  .profile{
+    width:160px;
+    margin:20px auto;
+  }
+
+  .social{
+    justify-content:center;
+  }
+
+  .hire{
+    margin-top:30px;
+  }
+
+  /* Main content should not shift left on mobile */
+  .main{
+    margin-left:0;
+  }
+}
+@media (max-width:900px){
+  .sidebar{
+    display:flex;          /* 👈 keep it visible */
+    position:relative;     /* 👈 no fixed on mobile */
+    width:100%;
+    height:auto;
+    margin:24px 0 0;
+    border-radius:0;
+    border:none;
+    padding:40px 20px;
+    background:#1b1b1b;
+  }
+}
+/* ================= PAGE STRUCTURE ================= */
+.page-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width: 901px){
+  .sidebar{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+  }
+
+  .main{
+    margin-left: 340px;
+  }
+}
+
+/* ================= MOBILE ORDER FIX ================= */
+@media (max-width: 900px){
+
+  .page-wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main{
+    order: 1;        /* HERO FIRST */
+    margin-left: 0;
+  }
+
+  .sidebar{
+    order: 2;        /* SIDEBAR SECOND */
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 40px 20px;
+    border-radius: 0;
+  }
+
+  .services,
+  .portfolio,
+  .contact{
+    order: 3;        /* CONTENT AFTER SIDEBAR */
+  }
+
+  footer{
+    order: 4;        /* FOOTER ALWAYS LAST */
+  }
+}
+/* ===== FORCE SIDEBAR AS 2ND SECTION ON MOBILE ===== */
+@media (max-width: 900px){
+
+  /* Make body a column flow */
+  body{
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* HERO FIRST */
+  .main{
+    order: 1;
+  }
+
+  /* SIDEBAR SECOND */
+  .sidebar{
+    order: 2;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 40px 20px;
+    border-radius: 0;
+    border: none;
+  }
+
+  /* EVERYTHING ELSE AFTER */
+  section,
+  footer{
+    order: 3;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu-btn" onclick="toggleMenu()">
+  <i class="fa-solid fa-bars"></i>
+</div>
+
+<div class="menu-panel" id="menu">
+  <div class="menu-header">
+    <span>Menu</span>
+    <i class="fa-solid fa-xmark" onclick="toggleMenu()"></i>
+  </div>
+
+  <ul>
+    <li class="dropdown">
+      <div class="dropdown-title" onclick="toggleDropdown(this)">
+        <span><i class="fa-solid fa-house"></i> Home</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="404.html">Home</a></li>
+        <li><a href="404.html">Home 2</a></li>
+      </ul>
+    </li>
+
+    <li><a href="404.html"><i class="fa-solid fa-user"></i> About</a></li>
+    <li><a href="404.html"><i class="fa-solid fa-file"></i> Resume</a></li>
+    <li><a href="404.html"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+    <li><a href="404.html"><i class="fa-solid fa-code"></i> Skills</a></li>
+    <li><a href="404.html"><i class="fa-solid fa-grid"></i> Portfolio</a></li>
+    <li><a href="404.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+  </ul>
+</div>
+
+<main class="main">
+  <img src="logo.webp" class="logo reveal">
+
+<div class="hero-center">
+  <div class="intro reveal">
+    <h1>
+      Say Hi from <span>Kamali</span>,<br>
+      Frontend Developer<br>
+      and Designer
+    </h1>
+    <p>I design and code beautifully simple web interfaces and love what I do.</p>
+  </div>
+
+  <!-- DESKTOP VERTICAL ICON NAV -->
+<div class="side-icon-nav">
+  <a href="404.html" class="active"><i class="fa-solid fa-house"></i></a>
+  <a href="404.html"><i class="fa-solid fa-user"></i></a>
+  <a href="404.html"><i class="fa-solid fa-briefcase"></i></a>
+  <a href="404.html"><i class="fa-solid fa-file"></i></a>
+  <a href="404.html"><i class="fa-solid fa-layer-group"></i></a>
+  <a href="404.html"><i class="fa-solid fa-grid"></i></a>
+  <a href="404.html"><i class="fa-solid fa-comment"></i></a>
+  <a href="404.html"><i class="fa-solid fa-envelope"></i></a>
+</div>
+
+  <div class="circle-wrapper reveal">
+    <div class="circle one">
+      <i class="fa-solid fa-arrow-down"></i>
+    </div>
+    <div class="circle two"></div>
+  </div>
+
+  <div class="stats reveal">
+    <div>
+      <h2>5+</h2>
+      <p>YEARS EXPERIENCE</p>
+    </div>
+    <div>
+      <h2>50+</h2>
+      <p>PROJECTS COMPLETED</p>
+    </div>
+  </div>
+</div>
+
+<aside class="sidebar">
+  <h2>Kamali</h2>
+  <p class="role">Frontend Developer & Designer</p>
+
+  <img src="womenn.webp" class="profile" alt="Kamali">
+
+  <p class="email">hello@kamali.design</p>
+  <p class="location">Based in India</p>
+
+  <p class="copyright">© 2025 Kamali</p>
+
+  <div class="social">
+    <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+    <a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+    <a href="404.html"><i class="fa-brands fa-dribbble"></i></a>
+    <a href="404.html"><i class="fa-brands fa-github"></i></a>
+  </div>
+
+  <button class="hire">
+    <i class="fa-solid fa-envelope"></i> HIRE ME!
+  </button>
+</aside>
+
+<script>
+function toggleMenu(){
+  document.getElementById("menu").classList.toggle("active");
+}
+function toggleDropdown(el){
+  const menu = el.nextElementSibling;
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+const reveals=document.querySelectorAll(".reveal");
+function revealOnScroll(){
+  reveals.forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight - 80){
+      el.classList.add("active");
+    }
+  });
+}
+window.addEventListener("scroll",revealOnScroll);
+window.addEventListener("load",revealOnScroll);
+</script>
+
+<section class="about-section">
+  <span class="about-badge reveal-delay-1">
+    <i class="fa-solid fa-user"></i> ABOUT
+  </span>
+
+  <h2 class="about-title reveal-delay-2">
+    Every great design begin with<br>
+    an even <span class="highlight">better story</span>
+  </h2>
+
+  <p class="about-text reveal-delay-3">
+    Since beginning my journey as a freelance designer nearly 8 years ago,
+    I've done remote work for agencies, consulted for startups, and collaborated
+    with talented people to create digital products for both business and
+    consumer use.
+  </p>
+
+  <p class="about-text reveal-delay-4">
+    I'm quietly confident, naturally curious, and perpetually working on
+    improving my chopsone design problem at a time.
+  </p>
+</section>
+<style>
+    /* ================= ABOUT SECTION ================= */
+.about-section{
+  max-width:780px;
+  margin:0 auto;
+  padding:120px 20px;
+}
+
+/* badge */
+.about-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.15);
+  font-size:12px;
+  letter-spacing:1px;
+  margin-bottom:30px;
+  opacity:0;
+  animation:fadeUp .8s ease forwards;
+}
+
+/* title */
+.about-title{
+  font-size:48px;
+  line-height:1.25;
+  font-weight:500;
+  margin-bottom:28px;
+  opacity:0;
+  animation:fadeUp .8s ease forwards;
+}
+
+/* highlight word */
+.highlight{
+  color:#ff7a18;
+  position:relative;
+}
+
+.highlight::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:40%;
+  background:rgba(255,122,24,.15);
+  z-index:-1;
+  animation:highlightGlow 2.5s ease-in-out infinite alternate;
+}
+
+/* paragraph */
+.about-text{
+  font-size:15px;
+  line-height:1.7;
+  color:#bdbdbd;
+  margin-bottom:18px;
+  opacity:0;
+  animation:fadeUp .8s ease forwards;
+}
+
+/* stagger delays */
+.reveal-delay-1{ animation-delay:.2s; }
+.reveal-delay-2{ animation-delay:.4s; }
+.reveal-delay-3{ animation-delay:.6s; }
+.reveal-delay-4{ animation-delay:.8s; }
+
+/* animations */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes highlightGlow{
+  from{opacity:.3;}
+  to{opacity:.7;}
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .about-title{
+    font-size:32px;
+  }
+}
+</style>
+
+<section class="resume-section">
+  <span class="resume-badge">
+    <i class="fa-solid fa-briefcase"></i> RESUME
+  </span>
+
+  <h2 class="resume-title">
+    Education & <span>Experience</span>
+  </h2>
+
+  <div class="timeline">
+
+    <!-- ITEM -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <span class="timeline-year">2023 – Present</span>
+
+      <h3>Frontend Developer</h3>
+      <p class="company">Stackly / Freelance</p>
+
+      <h4>Web Designer</h4>
+      <p class="company">Freelance Projects</p>
+    </div>
+
+    <!-- ITEM -->
+    <div class="timeline-item">
+      <div class="timeline-dot active"></div>
+      <span class="timeline-year active">2020 – 2023</span>
+
+      <h3>Bachelor of Computer Applications (BCA)</h3>
+      <p class="company">Jayan College</p>
+
+      <h4>Frontend Intern</h4>
+      <p class="company">Personal & Academic Projects</p>
+    </div>
+
+    <!-- ITEM -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <span class="timeline-year">2018 – 2020</span>
+
+      <h3>Higher Secondary Education</h3>
+      <p class="company">State Board</p>
+    </div>
+
+  </div>
+</section>
+<style>
+   /* ================= RESUME SECTION ================= */
+.resume-section{
+  max-width:900px;
+  margin:0 auto;
+  padding:120px 20px;
+}
+
+.resume-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.15);
+  font-size:12px;
+  margin-bottom:28px;
+  animation:fadeUp .6s ease both;
+}
+
+.resume-title{
+  font-size:48px;
+  margin-bottom:60px;
+  font-weight:500;
+  animation:fadeUp .8s ease both;
+}
+
+.resume-title span{
+  color:#ff7a18;
+}
+
+/* ================= TIMELINE ================= */
+.timeline{
+  position:relative;
+  padding-left:40px;
+}
+
+/* animated line */
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:8px;
+  top:0;
+  width:2px;
+  height:100%;
+  background:rgba(255,255,255,.15);
+  transform:scaleY(0);
+  transform-origin:top;
+  animation:drawLine 1.8s ease forwards;
+}
+
+/* ================= ITEM ================= */
+.timeline-item{
+  position:relative;
+  margin-bottom:60px;
+  opacity:0;
+  transform:translateY(40px);
+  animation:timelineReveal .9s ease forwards;
+  transition:.4s ease;
+}
+
+.timeline-item:nth-child(1){animation-delay:.4s;}
+.timeline-item:nth-child(2){animation-delay:.7s;}
+.timeline-item:nth-child(3){animation-delay:1s;}
+.timeline-item:nth-child(4){animation-delay:1.3s;}
+
+/* hover lift */
+.timeline-item:hover{
+  transform:translateY(-6px);
+}
+
+/* ================= DOT ================= */
+.timeline-dot{
+  position:absolute;
+  left:-2px;
+  top:6px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#777;
+  box-shadow:0 0 0 rgba(255,122,24,.4);
+  animation:pulseDot 2.4s infinite;
+}
+
+.timeline-dot.active{
+  background:#ff7a18;
+  animation:pulseActive 1.6s infinite;
+}
+
+/* ================= YEAR ================= */
+.timeline-year{
+  font-size:13px;
+  color:#aaa;
+  display:block;
+  margin-bottom:10px;
+}
+
+.timeline-year.active{
+  color:#ff7a18;
+  position:relative;
+  overflow:hidden;
+}
+
+/* shimmer effect */
+.timeline-year.active::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transform:translateX(-100%);
+  animation:yearShimmer 2.6s infinite;
+}
+
+/* ================= TEXT ================= */
+.timeline-item h3{
+  font-size:20px;
+  margin-bottom:4px;
+  transition:.3s;
+}
+
+.timeline-item h4{
+  font-size:18px;
+  margin-top:14px;
+}
+
+.timeline-item:hover h3{
+  color:#ff7a18;
+}
+
+.company{
+  font-size:14px;
+  color:#aaa;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes timelineReveal{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes drawLine{
+  to{transform:scaleY(1);}
+}
+
+@keyframes pulseDot{
+  0%{box-shadow:0 0 0 0 rgba(255,122,24,.25);}
+  70%{box-shadow:0 0 0 10px rgba(255,122,24,0);}
+  100%{box-shadow:0 0 0 0 rgba(255,122,24,0);}
+}
+
+@keyframes pulseActive{
+  0%{box-shadow:0 0 0 0 rgba(255,122,24,.6);}
+  70%{box-shadow:0 0 0 14px rgba(255,122,24,0);}
+  100%{box-shadow:0 0 0 0 rgba(255,122,24,0);}
+}
+
+@keyframes yearShimmer{
+  to{transform:translateX(100%);}
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:900px){
+  .resume-title{
+    font-size:32px;
+  }
+
+  .timeline-item{
+    animation-duration:.7s;
+  }
+}
+/* ================= MOBILE TIMELINE FIX ================= */
+@media(max-width:900px){
+
+  /* timeline padding */
+  .timeline{
+    padding-left:34px;
+  }
+
+  /* move vertical line slightly left */
+  .timeline::before{
+    left:6px;
+  }
+
+  /* timeline item spacing */
+  .timeline-item{
+    margin-bottom:50px;
+  }
+
+  /* dot alignment */
+  .timeline-dot{
+    left:-6px;
+    top:4px;
+    width:12px;
+    height:12px;
+  }
+
+  /* year spacing */
+  .timeline-year{
+    margin-left:8px;
+    margin-bottom:12px;
+    font-size:12px;
+  }
+
+  /* titles */
+  .timeline-item h3{
+    font-size:18px;
+    line-height:1.3;
+  }
+
+  .timeline-item h4{
+    font-size:16px;
+  }
+
+  /* company text */
+  .company{
+    font-size:13px;
+    line-height:1.5;
+  }
+}
+/* ================= DESKTOP TIMELINE REFINEMENT ================= */
+@media (min-width: 901px){
+
+  /* more breathing space */
+  .timeline{
+    padding-left:60px;
+  }
+
+  /* center vertical line properly */
+  .timeline::before{
+    left:18px;
+  }
+
+  /* dot alignment */
+  .timeline-dot{
+    left:11px;
+    top:6px;
+    width:14px;
+    height:14px;
+  }
+
+  /* year positioning */
+  .timeline-year{
+    margin-left:18px;
+    margin-bottom:12px;
+    font-size:13px;
+    letter-spacing:.4px;
+  }
+
+  /* titles spacing */
+  .timeline-item h3{
+    font-size:21px;
+    line-height:1.35;
+  }
+
+  .timeline-item h4{
+    font-size:18px;
+    margin-top:12px;
+  }
+
+  /* company text */
+  .company{
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  /* more elegant spacing between blocks */
+  .timeline-item{
+    margin-bottom:70px;
+  }
+}
+/* ================= DESKTOP TIMELINE POLISH ================= */
+@media (min-width: 901px){
+
+  /* give more breathing room from the line */
+  .timeline{
+    padding-left:70px;
+  }
+
+  /* align the vertical line better */
+  .timeline::before{
+    left:22px;
+  }
+
+  /* dot alignment */
+  .timeline-dot{
+    left:15px;
+    top:8px;
+  }
+
+  /* year text spacing */
+  .timeline-year{
+    margin-left:24px;
+    margin-bottom:14px;
+    font-size:13px;
+    letter-spacing:.4px;
+  }
+
+  /* improve title readability */
+  .timeline-item h3{
+    line-height:1.4;
+    margin-bottom:6px;
+  }
+
+  /* active (highlighted) title refinement */
+  .timeline-item .highlighted,
+  .timeline-item h3 span{
+    color:#ff7a18;
+  }
+
+  /* softer spacing between entries */
+  .timeline-item{
+    margin-bottom:80px;
+  }
+
+  /* company text */
+  .company{
+    line-height:1.6;
+  }
+}
+/* ================= SERVICES HOVER / TOUCH EFFECT ================= */
+.service-card{
+  position:relative;
+  padding:30px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;
+  background:rgba(0,0,0,.25);
+  transition:all .4s ease;
+  cursor:pointer;
+}
+
+/* ICON */
+.service-icon{
+  position:absolute;
+  top:30px;
+  right:30px;
+  font-size:22px;
+  color:#aaa;
+  transition:.4s ease;
+}
+
+/* TEXT */
+.service-card h3{
+  font-size:18px;
+  margin-bottom:10px;
+  transition:.4s ease;
+}
+
+.service-card p{
+  font-size:14px;
+  color:#aaa;
+  transition:.4s ease;
+}
+
+.service-card .projects{
+  display:inline-block;
+  margin-top:16px;
+  font-size:12px;
+  letter-spacing:1px;
+  transition:.4s ease;
+}
+
+/* ===== HOVER / TOUCH ORANGE EFFECT ===== */
+.service-card:hover,
+.service-card:active,
+.service-card:focus-within{
+  border-color:#ff7a18;
+  box-shadow:0 0 0 1px rgba(255,122,24,.6),
+             0 0 30px rgba(255,122,24,.15);
+}
+
+/* text + icon turn orange */
+.service-card:hover h3,
+.service-card:active h3,
+.service-card:focus-within h3,
+.service-card:hover .service-icon,
+.service-card:active .service-icon,
+.service-card:focus-within .service-icon{
+  color:#ff7a18;
+}
+
+/* subtle lift */
+.service-card:hover{
+  transform:translateY(-6px);
+}
+
+/* MOBILE: stronger feedback */
+@media(max-width:900px){
+  .service-card:active{
+    transform:scale(.98);
+  }
+}
+</style>
+<div class="service-card">
+  <h3>Website Design</h3>
+  <p>I create digital products with unique ideas using Figma & Framer.</p>
+  <span class="projects">24 PROJECTS</span>
+  <i class="fa-solid fa-pen-nib service-icon"></i>
+</div>
+<!-- SERVICE 4 -->
+<div class="service-card">
+  <h3>UI / UX Design</h3>
+  <p>I design clean, user-friendly interfaces with strong visual hierarchy.</p>
+  <span class="projects">18 PROJECTS</span>
+  <i class="fa-solid fa-layer-group service-icon"></i>
+</div>
+
+<!-- SERVICE 5 -->
+<div class="service-card">
+  <h3>Landing Pages</h3>
+  <p>High-converting landing pages optimized for speed and performance.</p>
+  <span class="projects">32 PROJECTS</span>
+  <i class="fa-solid fa-bolt service-icon"></i>
+</div>
+
+<!-- SERVICE 6 -->
+<div class="service-card">
+  <h3>Portfolio Websites</h3>
+  <p>Modern personal and business portfolios with premium animations.</p>
+  <span class="projects">21 PROJECTS</span>
+  <i class="fa-solid fa-id-card service-icon"></i>
+</div>
+
+<!-- SERVICE 7 -->
+<div class="service-card">
+  <h3>Website Redesign</h3>
+  <p>Revamping existing websites with improved UI, UX, and performance.</p>
+  <span class="projects">15 PROJECTS</span>
+  <i class="fa-solid fa-rotate service-icon"></i>
+</div>
+<section class="skills-section">
+  <span class="skills-badge">
+    <i class="fa-solid fa-gem"></i> MY SKILLS
+  </span>
+
+  <h2 class="skills-title">
+    My <span>Advantages</span>
+  </h2>
+
+  <div class="skills-grid">
+
+    <div class="skill-card skill-animate">
+      <img src="figma.webp">
+      <h3>92%</h3>
+      <p>Figma</p>
+    </div>
+
+    <div class="skill-card skill-animate active">
+      <img src="framer.webp">
+      <h3>85%</h3>
+      <p>Framer</p>
+    </div>
+
+    <div class="skill-card skill-animate">
+      <img src="webflow.webp">
+      <h3>80%</h3>
+      <p>Webflow</p>
+    </div>
+
+    <div class="skill-card skill-animate">
+      <img src="react.webp">
+      <h3>90%</h3>
+      <p>React</p>
+    </div>
+
+    <div class="skill-card skill-animate">
+      <img src="wordpress.webp">
+      <h3>86%</h3>
+      <p>WordPress</p>
+    </div>
+
+    <div class="skill-card skill-animate">
+      <img src="laravel.webp">
+      <h3>70%</h3>
+      <p>Laravel / PHP</p>
+    </div>
+
+  </div>
+</section>
+<style>
+    /* ================= SKILLS SECTION ================= */
+    /* ================= SKILLS SECTION ================= */
+.skills-section{
+  max-width:1100px;
+  margin:0 auto;
+  padding:120px 20px;
+}
+
+.skills-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.15);
+  font-size:12px;
+  margin-bottom:24px;
+}
+
+.skills-title{
+  font-size:48px;
+  margin-bottom:60px;
+}
+
+.skills-title span{
+  color:#ff7a18;
+}
+
+/* GRID */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  perspective:1000px;
+}
+
+/* CARD */
+.skill-card{
+  height:220px;
+  border-radius:120px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(0,0,0,.25);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition:.4s ease;
+}
+
+.skill-card img{
+  width:42px;
+  margin-bottom:18px;
+}
+
+.skill-card h3{
+  font-size:28px;
+  color:#ff7a18;
+  margin-bottom:8px;
+}
+
+.skill-card p{
+  font-size:14px;
+  color:#ccc;
+}
+
+/* ACTIVE CARD */
+.skill-card.active{
+  border-color:#ff7a18;
+}
+
+/* HOVER */
+.skill-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  border-color:#ff7a18;
+}
+
+/* ================= RIGHT → FRONT ANIMATION ================= */
+.skill-animate{
+  opacity:0;
+  transform:
+    translateX(120px)
+    scale(.85)
+    rotateY(-12deg);
+  animation:skillIn 1s ease forwards;
+}
+
+/* stagger */
+.skill-animate:nth-child(1){animation-delay:.2s;}
+.skill-animate:nth-child(2){animation-delay:.4s;}
+.skill-animate:nth-child(3){animation-delay:.6s;}
+.skill-animate:nth-child(4){animation-delay:.8s;}
+.skill-animate:nth-child(5){animation-delay:1s;}
+.skill-animate:nth-child(6){animation-delay:1.2s;}
+
+@keyframes skillIn{
+  0%{
+    opacity:0;
+    transform:
+      translateX(120px)
+      scale(.85)
+      rotateY(-12deg);
+  }
+  60%{
+    opacity:1;
+    transform:
+      translateX(-8px)
+      scale(1.05)
+      rotateY(0deg);
+  }
+  100%{
+    opacity:1;
+    transform:
+      translateX(0)
+      scale(1)
+      rotateY(0deg);
+  }
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .skills-title{font-size:32px;}
+  .skills-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}</style>
+<section class="portfolio-section">
+  <span class="portfolio-badge">
+    <i class="fa-solid fa-grid"></i> PORTFOLIO
+  </span>
+
+  <h2 class="portfolio-title">
+    Featured <span>Projects</span>
+  </h2>
+
+  <div class="portfolio-hero">
+
+    <!-- Background Image -->
+    <img src="portfolio1.webp" class="portfolio-bg" alt="Project Background">
+
+    <!-- Big faded text -->
+    <div class="portfolio-watermark">BUILDAU</div>
+
+    
+
+    <!-- Tech Pills -->
+    <div class="portfolio-tags">
+      <span>Figma</span>
+      <span>Framer</span>
+      <span class="active">WordPress</span>
+    </div>
+
+  </div>
+</section>
+<style>
+    /* ================= PORTFOLIO SECTION ================= *//* ================= PORTFOLIO SECTION ================= */
+.portfolio-section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:120px 20px;
+}
+
+.portfolio-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.15);
+  font-size:12px;
+  margin-bottom:24px;
+}
+
+.portfolio-title{
+  font-size:48px;
+  margin-bottom:60px;
+}
+
+.portfolio-title span{
+  color:#ff7a18;
+}
+
+/* HERO */
+.portfolio-hero{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  min-height:420px;
+}
+
+/* background */
+.portfolio-bg{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(100%) brightness(.5);
+}
+
+/* watermark text */
+.portfolio-watermark{
+  position:absolute;
+  bottom:40px;
+  left:40px;
+  font-size:160px;
+  font-weight:800;
+  color:rgba(255,255,255,.06);
+  pointer-events:none;
+}
+
+/* center floating card */
+.portfolio-card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:70%;
+  max-width:720px;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  animation:floatIn 1.2s ease forwards;
+}
+
+.portfolio-card img{
+  width:100%;
+  display:block;
+}
+
+/* tags */
+.portfolio-tags{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:12px;
+}
+
+.portfolio-tags span{
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.25);
+  font-size:12px;
+  background:rgba(0,0,0,.4);
+}
+
+.portfolio-tags span.active{
+  background:#ff7a18;
+  color:#000;
+  border-color:#ff7a18;
+}
+
+/* animation */
+@keyframes floatIn{
+  from{
+    opacity:0;
+    transform:translate(-50%,-40%) scale(.92);
+  }
+  to{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .portfolio-title{
+    font-size:32px;
+  }
+
+  .portfolio-watermark{
+    font-size:90px;
+  }
+
+  .portfolio-card{
+    width:90%;
+  }
+}
+/* ================= FEATURED PROJECTS ================= */
+.featured-projects{
+  max-width:1200px;
+  margin:120px auto;
+  padding:0 20px;
+}
+
+.section-title{
+  font-size:22px;
+  margin-bottom:40px;
+  font-weight:500;
+}
+
+/* GRID */
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px;
+}
+
+/* CARD */
+.project-card{
+  position:relative;
+  padding:30px;
+  border-radius:28px;
+  transition:.4s ease;
+}
+
+.project-card img{
+  width:100%;
+  border-radius:20px;
+  margin-bottom:24px;
+}
+
+/* DARK CARD */
+.project-card.dark{
+  background:#3f3f3f;
+}
+
+/* LIGHT CARD */
+.project-card.light{
+  background:#f6d37a;
+}
+
+/* TECH PILLS */
+.tech{
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.tech span{
+  background:#fff;
+  color:#000;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:500;
+}
+
+/* TITLE */
+.project-card h3{
+  font-size:18px;
+  font-weight:500;
+}
+
+/* HOVER */
+.project-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .project-grid{
+    grid-template-columns:1fr;
+  }
+}
+/* ================= FEATURED STACK ================= */
+.featured-stack{
+  max-width:1100px;
+  margin:120px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:90px;
+}
+
+/* ITEM */
+.featured-item{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+/* CARD */
+.featured-card{
+  position:relative;
+  padding:40px;
+  border-radius:30px;
+  overflow:hidden;
+}
+
+/* DARK CARD */
+.featured-card.dark{
+  background:#3f3f3f;
+}
+
+/* LIGHT CARD */
+.featured-card.light{
+  background:#e6e6e6;
+}
+
+/* IMAGE */
+.featured-card img{
+  width:100%;
+  max-width:900px;
+  margin:0 auto;
+  display:block;
+  border-radius:22px;
+  transform:translateY(-10px);
+  box-shadow:0 30px 60px rgba(0,0,0,.45);
+}
+
+/* TECH PILLS */
+.tech-pill{
+  position:absolute;
+  bottom:30px;
+  left:30px;
+  display:flex;
+  gap:10px;
+}
+
+.tech-pill span{
+  padding:6px 14px;
+  background:#000;
+  color:#fff;
+  font-size:13px;
+  border-radius:20px;
+}
+
+/* light bg fix */
+.featured-card.light .tech-pill span{
+  background:#fff;
+  color:#000;
+}
+
+/* TITLE */
+.project-title{
+  font-size:18px;
+  color:#fff;
+  text-decoration:none;
+  width:max-content;
+  border-bottom:1px solid rgba(255,255,255,.4);
+  transition:.3s ease;
+}
+
+.project-title:hover{
+  color:#ff7a18;
+  border-color:#ff7a18;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .featured-stack{
+    gap:60px;
+  }
+
+  .featured-card{
+    padding:26px;
+  }
+
+  .tech-pill{
+    left:20px;
+    bottom:20px;
+  }
+}   
+</style>
+<section class="featured-projects">
+
+  <h2 class="section-title">
+    Bureau – Architecture Studio Website
+  </h2>
+
+  <div class="project-grid">
+
+    <!-- PROJECT 1 -->
+    <div class="project-card dark">
+      <img src="portfolio2.webp" alt="Moonex Theme">
+      <div class="tech">
+        <span>WordPress</span>
+        <span>Laravel / PHP</span>
+      </div>
+      <h3>Moonex WordPress Theme</h3>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card light">
+      <img src="portfolio3.webp" alt="Taskly Dashboard">
+      <div class="tech">
+        <span>WordPress</span>
+        <span>Laravel / PHP</span>
+      </div>
+      <h3>Taskly Dashboard</h3>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="featured-stack">
+
+  <!-- PROJECT 1 -->
+  <div class="featured-item">
+    <div class="featured-card dark">
+      <img src="portfolio4.webp" alt="Hinterland Project">
+
+      <div class="tech-pill left">
+        <span>Figma</span>
+        <span>React</span>
+      </div>
+    </div>
+
+    <a href="#" class="project-title">
+      Hinterland – Real Estate Site Redesign
+    </a>
+  </div>
+
+  <!-- PROJECT 2 -->
+  <div class="featured-item">
+    <div class="featured-card light">
+      <img src="portfolio5.webp" alt="Lewis Portfolio">
+
+      <div class="tech-pill left">
+        <span>Framer</span>
+      </div>
+    </div>
+
+    <a href="#" class="project-title">
+      Lewis Portfolio Framer Template
+    </a>
+  </div>
+
+</section>
+
+<section class="portfolio-list">
+
+<section class="testimonial-section">
+
+  <span class="badge">💬 TESTIMONIAL</span>
+
+  <h2 class="testimonial-title">
+    Trusted by <span>Hundreds Clients</span>
+  </h2>
+
+  <div class="testimonial-card">
+
+    <div class="testimonial-content active">
+      <div class="user">
+        <img src="man1.webp">
+        <div>
+          <h4>Paublo Dybala</h4>
+          <p>CEO of <span>IBM Global</span></p>
+        </div>
+      </div>
+
+      <blockquote>
+        “Drake – A Developer with creativity, professional and master of code.
+        Much more than what I expect. High quality product & flexible price.
+        Recommended!”
+      </blockquote>
+
+      <small>PROJECT</small>
+    </div>
+
+    <div class="testimonial-content">
+      <div class="user">
+        <img src="women.webp">
+        <div>
+          <h4>Sarah Johnson</h4>
+          <p>Product Manager at <span>Google</span></p>
+        </div>
+      </div>
+
+      <blockquote>
+        “Amazing experience! Clean design, fast delivery and great communication.
+        Would definitely work again.”
+      </blockquote>
+
+      <small>PROJECT</small>
+    </div>
+
+    <div class="testimonial-content">
+      <div class="user">
+        <img src="man2.webp">
+        <div>
+          <h4>Michael Lee</h4>
+          <p>Founder of <span>Startup Hub</span></p>
+        </div>
+      </div>
+
+      <blockquote>
+        “Very professional work with attention to detail.
+        The result exceeded our expectations.”
+      </blockquote>
+
+      <small>PROJECT</small>
+    </div>
+
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="testimonial-nav">
+    <button onclick="prevTestimonial()">‹</button>
+    <span id="counter">1 / 3</span>
+    <button onclick="nextTestimonial()">›</button>
+  </div>
+
+</section>
+<style>
+.testimonial-section{
+  max-width:1100px;
+  margin:120px auto;
+  padding:0 20px;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 14px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:30px;
+}
+
+.testimonial-title{
+  font-size:48px;
+  margin-bottom:50px;
+}
+
+.testimonial-title span{
+  color:#ff7a18;
+}
+
+/* CARD */
+.testimonial-card{
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:28px;
+  padding:40px;
+  min-height:260px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* CONTENT */
+.testimonial-content{
+  opacity:0;
+  transform:translateX(40px);
+  transition:.6s ease;
+  position:absolute;
+  inset:40px;
+}
+
+.testimonial-content.active{
+  opacity:1;
+  transform:translateX(0);
+  position:relative;
+}
+
+/* USER */
+.user{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  margin-bottom:26px;
+}
+
+.user img{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+}
+
+.user h4{
+  font-size:16px;
+}
+
+.user p{
+  font-size:13px;
+  color:#aaa;
+}
+
+.user span{
+  color:#ff7a18;
+}
+
+/* TEXT */
+blockquote{
+  font-size:20px;
+  line-height:1.6;
+  margin-bottom:26px;
+}
+
+small{
+  font-size:12px;
+  color:#aaa;
+}
+
+/* NAV */
+.testimonial-nav{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:26px;
+}
+
+.testimonial-nav button{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:#ff7a18;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.testimonial-nav span{
+  color:#aaa;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .testimonial-title{
+    font-size:32px;
+  }
+
+  blockquote{
+    font-size:16px;
+  }
+}
+</style>
+<script>
+const testimonials = document.querySelectorAll('.testimonial-content');
+const counter = document.getElementById('counter');
+let index = 0;
+
+function showTestimonial(i){
+  testimonials.forEach(t => t.classList.remove('active'));
+  testimonials[i].classList.add('active');
+  counter.textContent = `${i + 1} / ${testimonials.length}`;
+}
+
+function nextTestimonial(){
+  index = (index + 1) % testimonials.length;
+  showTestimonial(index);
+}
+
+function prevTestimonial(){
+  index = (index - 1 + testimonials.length) % testimonials.length;
+  showTestimonial(index);
+}
+</script>
+
+<section class="brands-section">
+  <p class="brands-title">WORK WITH 60+ BRANDS WORLDWIDE</p>
+
+  <div class="brands-grid">
+    <img src="client-1.webp" alt="Brand">
+    <img src="client-2.webp" alt="Brand">
+    <img src="client-3.webp" alt="Brand">
+    <img src="client-4.webp" alt="Brand">
+    <img src="client-5.webp" alt="Brand">
+    <img src="client-6.webp" alt="Brand">
+    <img src="client-7.webp" alt="Brand">
+    <img src="client-8.webp" alt="Brand">
+  </div>
+</section>
+<style>
+    /* ================= BRANDS SECTION ================= */
+    /* ================= BRANDS ================= */
+.brands-section{
+  padding:120px 20px;
+  background:transparent;
+}
+
+.brands-title{
+  font-size:14px;
+  letter-spacing:2px;
+  color:#fff;
+  margin-bottom:60px;
+}
+
+/* GRID */
+.brands-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:60px;
+  align-items:center;
+}
+
+/* LOGOS */
+.brands-grid img{
+  height:42px;
+  margin:auto;
+  filter:grayscale(100%);
+  opacity:.45;
+  transition:.4s ease;
+  transform:scale(.9);
+  cursor:pointer;
+}
+
+/* HOVER / TOUCH EFFECT */
+.brands-grid img:hover,
+.brands-grid img:focus{
+  transform:scale(1.4);
+  opacity:1;
+  filter:grayscale(0);
+  z-index:2;
+}
+
+/* DIM OTHERS WHEN ONE IS HOVERED */
+.brands-grid:hover img{
+  opacity:.25;
+}
+
+.brands-grid:hover img:hover{
+  opacity:1;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .brands-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:40px;
+  }
+
+  .brands-grid img{
+    height:36px;
+  }
+}
+/* MOBILE IMPROVEMENTS */
+@media(max-width:900px){
+  .brands-section{
+    padding:80px 16px;
+  }
+
+  .brands-title{
+    text-align:center;
+    margin-bottom:40px;
+  }
+
+  .brands-grid{
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+
+  .brands-grid img{
+    width:100%;
+    max-width:110px;
+    height:auto;
+    transform:scale(1);
+    opacity:.6;
+  }
+
+  /* tap effect */
+  .brands-grid img:active{
+    transform:scale(1.35);
+    opacity:1;
+    filter:grayscale(0);
+  }
+}
+
+/* SMALL PHONES */
+@media(max-width:480px){
+  .brands-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap:26px;
+  }
+
+  .brands-grid img{
+    max-width:130px;
+  }
+}
+</style>
+<section class="pricing-section">
+
+  <h2 class="pricing-title">
+    My <span>Pricing</span>
+  </h2>
+
+  <div class="pricing-grid">
+
+    <!-- BASIC -->
+    <div class="pricing-card basic">
+      <div class="card-head">
+        <h3>BASIC</h3>
+        <p class="hint">Have design ready to build?<br>or small budget</p>
+      </div>
+
+      <div class="price">
+        <span class="amount">$49</span>
+        <span class="unit">/ hours</span>
+      </div>
+
+      <hr>
+
+      <ul class="features">
+        <li>Need your wireframe</li>
+        <li>Design with Figma, Framer</li>
+        <li>Implement with Webflow, React, WordPress, Laravel/PHP</li>
+        <li>Remote / Online</li>
+        <li>Work in business days, no weekend</li>
+        <li>Support 6 months</li>
+      </ul>
+
+      <button class="pick-btn" onclick="window.location.href='404.html'">
+  PICK THIS PACKAGE
+</button>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="pricing-card premium">
+      <div class="card-head">
+        <h3>PREMIUM</h3>
+        <p class="hint">Not have any design?<br>Leave it for me</p>
+      </div>
+
+      <div class="price">
+        <span class="amount">$99</span>
+        <span class="unit">/ hours</span>
+      </div>
+
+      <hr>
+
+      <ul class="features">
+        <li>Don't need wireframe or anything</li>
+        <li>Design with Figma, Framer from scratch</li>
+        <li>Implement with Webflow, React, WordPress, Laravel/PHP</li>
+        <li>Remote / Online</li>
+        <li>Work with both weekend</li>
+        <li>Support 12 months</li>
+        <li>Your project always priority</li>
+        <li>Customer care gifts</li>
+      </ul>
+
+      <button class="pick-btn" onclick="window.location.href='404.html'">
+  PICK THIS PACKAGE
+</button>
+    </div>
+
+  </div>
+</section>
+<style>
+ /* ================= PRICING ================= */
+.pricing-section{
+  max-width:1200px;
+  margin:140px auto;
+  padding:0 20px;
+}
+
+.pricing-title{
+  font-size:48px;
+  margin-bottom:60px;
+}
+
+.pricing-title span{
+  color:#ff7a18;
+}
+
+/* GRID */
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px;
+}
+
+/* CARD */
+.pricing-card{
+  background:#1b1b1b;
+  border-radius:28px;
+  padding:40px;
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;
+  flex-direction:column;
+  transition:.4s ease;
+}
+
+/* BASIC highlight */
+.pricing-card.basic{
+  border-color:#ff7a18;
+}
+
+/* HOVER */
+.pricing-card:hover{
+  transform:translateY(-8px);
+}
+
+/* HEAD */
+.card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:40px;
+}
+
+.card-head h3{
+  font-size:18px;
+  letter-spacing:1px;
+}
+
+.hint{
+  font-size:13px;
+  color:#aaa;
+  text-align:right;
+}
+
+/* PRICE */
+.price{
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.amount{
+  color:#ff7a18;
+  font-weight:600;
+}
+
+.unit{
+  font-size:16px;
+  color:#aaa;
+}
+
+/* DIVIDER */
+hr{
+  border:none;
+  border-top:1px solid rgba(255,255,255,.15);
+  margin:26px 0;
+}
+
+/* FEATURES */
+.features{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  font-size:14px;
+  color:#ddd;
+  margin-bottom:40px;
+}
+
+/* BUTTON */
+.pick-btn{
+  margin-top:auto;
+  background:#ff7a18;
+  border:none;
+  padding:16px;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s ease;
+}
+
+.pick-btn:hover{
+  background:#ff8f3a;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .pricing-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pricing-title{
+    font-size:32px;
+  }
+}
+</style>
+<section class="contact-section">
+
+  <span class="contact-badge">
+    ✉ CONTACT
+  </span>
+
+  <h2 class="contact-title">
+    Let's Work <span>Together!</span>
+  </h2>
+
+  <a href="mailto:hello@kamali.design" class="contact-email">
+    hello@kamali.design
+  </a>
+
+  <form class="contact-form">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>FULL NAME <span>*</span></label>
+        <input type="text" placeholder="Your Full Name" required>
+      </div>
+
+      <div class="form-group">
+        <label>EMAIL <span>*</span></label>
+        <input type="email" placeholder="Your email address" required>
+      </div>
+
+      <div class="form-group">
+        <label>PHONE (OPTIONAL)</label>
+        <input type="text" placeholder="Your number phone">
+      </div>
+
+      <div class="form-group">
+        <label>SUBJECT <span>*</span></label>
+        <input type="text" value="Subject 1" required>
+      </div>
+
+      <div class="form-group full">
+        <label>YOUR BUDGET (OPTIONAL)</label>
+        <input type="text" placeholder="A range budget for your project">
+      </div>
+
+      <div class="form-group full">
+        <label>MESSAGE</label>
+        <textarea placeholder="Write your message here ..."></textarea>
+      </div>
+
+    </div>
+
+    <button type="submit" class="send-btn">
+      SEND MESSAGE
+    </button>
+
+  </form>
+
+</section>
+<style>
+/* ================= CONTACT ================= */
+.contact-section{
+  max-width:1200px;
+  margin:140px auto;
+  padding:0 20px;
+}
+
+/* BADGE */
+.contact-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.2);
+  font-size:12px;
+  margin-bottom:30px;
+}
+
+/* TITLE */
+.contact-title{
+  font-size:48px;
+  margin-bottom:16px;
+}
+
+.contact-title span{
+  color:#ff7a18;
+}
+
+/* EMAIL */
+.contact-email{
+  display:block;
+  font-size:22px;
+  color:#fff;
+  margin-bottom:60px;
+  text-decoration:none;
+}
+
+/* FORM */
+.contact-form{
+  max-width:900px;
+}
+
+/* GRID */
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:40px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+label{
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+label span{
+  color:#ff7a18;
+}
+
+input,
+textarea{
+  background:transparent;
+  border:none;
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding:10px 0;
+  font-size:16px;
+  color:#fff;
+  outline:none;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#777;
+}
+
+textarea{
+  min-height:120px;
+  resize:none;
+}
+
+/* ATTACHMENT */
+.attachment{
+  margin-top:40px;
+  font-size:13px;
+  color:#aaa;
+  cursor:pointer;
+}
+
+/* BUTTON */
+.send-btn{
+  margin-top:40px;
+  background:#ff7a18;
+  color:#000;
+  border:none;
+  padding:16px 40px;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .contact-title{
+    font-size:32px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+}
+</style>
+<footer class="site-footer">
+
+  <div class="footer-container">
+
+    <!-- LEFT -->
+    <div class="footer-brand">
+      <h3>Kamali</h3>
+      <p>Frontend Developer & Designer crafting modern web experiences.</p>
+    </div>
+
+    <!-- CENTER -->
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="404.html">Home</a></li>
+        <li><a href="404.html">About</a></li>
+        <li><a href="404.html">Services</a></li>
+        <li><a href="404.html">Portfolio</a></li>
+        <li><a href="404.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="footer-social">
+      <h4>Follow Me</h4>
+      <div class="social-icons">
+        <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+        <a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+        <a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="404.html"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Kamali. All Rights Reserved.
+  </div>
+
+</footer>
+<style>
+    /* ================= FOOTER ================= */
+.site-footer{
+  background:#0f0f0f;
+  border-top:1px solid rgba(255,255,255,.1);
+  margin-top:140px;
+}
+
+.footer-container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:60px 20px;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
+}
+
+/* BRAND */
+.footer-brand h3{
+  font-size:22px;
+  margin-bottom:14px;
+}
+
+.footer-brand p{
+  font-size:14px;
+  color:#aaa;
+  max-width:320px;
+}
+
+/* LINKS */
+.footer-links h4,
+.footer-social h4{
+  font-size:14px;
+  margin-bottom:18px;
+  letter-spacing:1px;
+}
+
+.footer-links ul{
+  list-style:none;
+}
+
+.footer-links li{
+  margin-bottom:12px;
+}
+
+.footer-links a{
+  font-size:14px;
+  color:#aaa;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.footer-links a:hover{
+  color:#ff7a18;
+}
+
+/* SOCIAL */
+.social-icons{
+  display:flex;
+  gap:14px;
+}
+
+.social-icons a{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#aaa;
+  transition:.3s;
+}
+
+.social-icons a:hover{
+  background:#ff7a18;
+  color:#000;
+  border-color:#ff7a18;
+}
+
+/* BOTTOM */
+.footer-bottom{
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+  color:#777;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .footer-container{
+    grid-template-columns:1fr;
+    gap:40px;
+    text-align:center;
+  }
+
+  .footer-brand p{
+    margin:0 auto;
+  }
+
+  .social-icons{
+    justify-content:center;
+  }
+}
+</style>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Loading...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  background:#000;
+}
+
+/* VIDEO BACKGROUND */
+.loader-video{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+
+/* DARK OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:-1;
+}
+
+/* CENTER CONTENT */
+.loader-content{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+}
+
+/* LOGO */
+.logo{
+  font-size:32px;
+  font-weight:600;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+
+.logo span{
+  color:#ff7a18;
+}
+
+/* LOADING TEXT */
+.loading-text{
+  font-size:14px;
+  letter-spacing:3px;
+  color:#ccc;
+  margin-bottom:40px;
+}
+
+/* PROGRESS BAR */
+.progress{
+  width:220px;
+  height:4px;
+  background:rgba(255,255,255,.2);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress span{
+  display:block;
+  height:100%;
+  width:0%;
+  background:#ff7a18;
+  animation:load 4s linear forwards;
+}
+
+@keyframes load{
+  to{ width:100%; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔽 ADD YOUR VIDEO HERE -->
+<video class="loader-video" autoplay muted loop playsinline>
+  <source src="loading-video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="loader-content">
+  <div class="logo"><span></span></div>
+  <div class="loading-text">LOADING EXPERIENCE</div>
+
+  <div class="progress">
+    <span></span>
+  </div>
+</div>
+
+<script>
+  // Redirect after loading (match animation duration)
+  setTimeout(()=>{
+    window.location.href = "home.html";
+  }, 4200);
+</script>
+
+</body>
+</html>
