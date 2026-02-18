@@ -94,9 +94,41 @@ a{
 
 .menu-header{
   display:flex;
-  justify-content:space-between;
+ 
   margin-bottom:35px;
 }
+/* MENU PANEL - DESKTOP DEFAULT */
+.menu-panel{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;                 /* 👈 NOT full screen */
+  height: 100vh;
+  background: #0f0f0f;
+  transform: translateX(-100%);
+  transition: .4s ease;
+  z-index: 1000;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* OPEN STATE */
+.menu-panel.active{
+  transform: translateX(0);
+}
+@media (max-width: 768px){
+  .menu-panel{
+    width: 100vw;               /* 👈 FULL only on mobile */
+  }
+}
+.menu-btn{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+  cursor: pointer;
+}
+
 
 .menu-panel ul li{
   list-style:none;
@@ -941,6 +973,7 @@ function revealOnScroll(){
 }
 window.addEventListener("scroll",revealOnScroll);
 window.addEventListener("load",revealOnScroll);
+
 </script>
 
 <section class="about-section">
@@ -2332,15 +2365,23 @@ function showTestimonial(i){
 }
 
 function nextTestimonial(){
-  index = (index + 1) % testimonials.length;
-  showTestimonial(index);
+  if (index < testimonials.length - 1) {
+    index++;
+    showTestimonial(index);
+  }
 }
 
 function prevTestimonial(){
-  index = (index - 1 + testimonials.length) % testimonials.length;
-  showTestimonial(index);
+  if (index > 0) {
+    index--;
+    showTestimonial(index);
+  }
 }
+
+// Initial load
+showTestimonial(index);
 </script>
+
 
 <section class="brands-section">
   <p class="brands-title">WORK WITH 60+ BRANDS WORLDWIDE</p>
@@ -2835,17 +2876,25 @@ textarea{
   }
 }
 </style>
+
 <footer class="site-footer">
 
   <div class="footer-container">
 
     <!-- LEFT -->
-    <div class="footer-brand">
+    <div class="footer-left">
       <h3>Kamali</h3>
       <p>Frontend Developer & Designer crafting modern web experiences.</p>
+
+      <div class="social-icons">
+        <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+        <a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+        <a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="404.html"><i class="fa-brands fa-github"></i></a>
+      </div>
     </div>
 
-    <!-- CENTER -->
+    <!-- RIGHT -->
     <div class="footer-links">
       <h4>Quick Links</h4>
       <ul>
@@ -2857,17 +2906,6 @@ textarea{
       </ul>
     </div>
 
-    <!-- RIGHT -->
-    <div class="footer-social">
-      <h4>Follow Me</h4>
-      <div class="social-icons">
-        <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
-        <a href="404.html"><i class="fa-brands fa-twitter"></i></a>
-        <a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="404.html"><i class="fa-brands fa-github"></i></a>
-      </div>
-    </div>
-
   </div>
 
   <div class="footer-bottom">
@@ -2875,38 +2913,40 @@ textarea{
   </div>
 
 </footer>
+
 <style>
-    /* ================= FOOTER ================= */
-.site-footer{
+  .site-footer{
   background:#0f0f0f;
   border-top:1px solid rgba(255,255,255,.1);
   margin-top:140px;
 }
 
+/* CONTAINER */
 .footer-container{
   max-width:1200px;
   margin:0 auto;
   padding:60px 20px;
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:80px;
 }
 
-/* BRAND */
-.footer-brand h3{
+/* LEFT */
+.footer-left h3{
   font-size:22px;
   margin-bottom:14px;
 }
 
-.footer-brand p{
+.footer-left p{
   font-size:14px;
   color:#aaa;
   max-width:320px;
+  margin-bottom:22px;
 }
 
 /* LINKS */
-.footer-links h4,
-.footer-social h4{
+.footer-links h4{
   font-size:14px;
   margin-bottom:18px;
   letter-spacing:1px;
@@ -2967,17 +3007,26 @@ textarea{
 /* MOBILE */
 @media(max-width:900px){
   .footer-container{
-    grid-template-columns:1fr;
-    gap:40px;
+    flex-direction:column;
     text-align:center;
   }
 
-  .footer-brand p{
-    margin:0 auto;
+  .footer-left p{
+    margin:0 auto 22px;
   }
 
   .social-icons{
     justify-content:center;
   }
 }
+.footer-container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:60px 20px;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:120px;
+  align-items:start;
+}
+
 </style>
